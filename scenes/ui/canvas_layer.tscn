@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://tv78msbkxshj"]
+
+[ext_resource type="PackedScene" uid="uid://crgtj35jqtj6u" path="res://scenes/ui/main_menu/main_menu.tscn" id="1_1kb53"]
+[ext_resource type="Script" path="res://scenes/ui/canvas_layer.gd" id="1_h1kgl"]
+[ext_resource type="PackedScene" uid="uid://bdffr8ebg4185" path="res://scenes/ui/ingame_menu/in_game_menu.tscn" id="3_v6532"]
+[ext_resource type="PackedScene" uid="uid://dcetag1pxogfk" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="4_uikms"]
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("menus")]
+script = ExtResource("1_h1kgl")
+menus = NodePath("Menus")
+
+[node name="Menus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" parent="Menus" instance=ExtResource("1_1kb53")]
+layout_mode = 1
+
+[node name="InGameMenu" parent="Menus" instance=ExtResource("3_v6532")]
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="Menus" instance=ExtResource("4_uikms")]
+visible = false
+layout_mode = 1

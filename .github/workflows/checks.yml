@@ -1,0 +1,26 @@
+name: 🔗 Game Export Checks
+on:
+  pull_request:
+    branches:
+      - "*"
+    paths-ignore:
+      - "**/*.md"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/*"
+      - ".github/CODEOWNERS"
+  push:
+    branches:
+      - "master"
+    paths-ignore:
+      - "**/*.md"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/*"
+      - ".github/CODEOWNERS"
+
+jobs:
+  exports:
+    name: 🔗 Game Exports
+    uses: ./.github/workflows/exports.yml
+    with:
+      luapi_version: "v2.1-beta7"
+      publish: false

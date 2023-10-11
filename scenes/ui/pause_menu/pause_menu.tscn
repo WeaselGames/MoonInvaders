@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcetag1pxogfk"]
+
+[ext_resource type="Script" path="res://scenes/ui/pause_menu/pause_menu.gd" id="1_hc6wy"]
+[ext_resource type="Material" uid="uid://7k1j70yyf3bv" path="res://assets/shaders/effects/blur.tres" id="2_a50s4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmjyg"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 0.639216)
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hc6wy")
+menu_type = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("2_a50s4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -226.5
+offset_right = 156.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjyg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

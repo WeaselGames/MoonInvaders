@@ -1,0 +1,155 @@
+name: 🔗 Game Exports
+on:
+  workflow_call:
+    inputs:
+      luapi_version:
+        type: string
+        required: false
+        default: "v2.1-beta7"
+      
+      publish:
+        type: boolean
+        required: false
+        default: false
+
+  workflow_dispatch:
+    inputs:
+      luapi_version:
+        required: false
+        default: "v2.1-beta7" 
+      
+      publish:
+        required: false
+        default: false
+ 
+env:
+  EDITOR_URL: "https://github.com/WeaselGames/godot_luaAPI/releases/download/${{ inputs.luapi_version }}/linux-editor.zip"
+  EXPORT_TEMPLATES_URL: "https://github.com/WeaselGames/godot_luaAPI/releases/download/${{ inputs.luapi_version }}/export-templates.zip"
+
+jobs:
+  exports:
+    name: 🔗 Game Exports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download Editor and Export Templates
+        shell: bash
+        run: |
+          mkdir temp && cd temp
+          wget -q ${{ env.EDITOR_URL }}
+          unzip linux-editor.zip
+          mv godot* ../godot
+          chmod +x ../godot
+          rm -rf *.md LICENSE
+
+          wget -q ${{ env.EXPORT_TEMPLATES_URL }}
+          unzip export-templates.zip
+          mv templates /tmp
+
+          cd ..
+          ( timeout 5m ./godot --headless --editor --quit ) || true
+      
+      - name: Export Game - Linux
+        shell: bash
+        run: |
+          mkdir -p bin/linux/debug
+          mkdir -p bin/linux/release
+
+          ./godot --headless --export-debug linux:ci bin/linux/debug/moon_invaders.x86_64
+          ./godot --headless --export-release linux:ci bin/linux/release/moon_invaders.x86_64
+
+      - name: Export Game - Windows
+        shell: bash
+        run: |
+          mkdir -p bin/windows/debug
+          mkdir -p bin/windows/release
+
+          ./godot --headless --export-debug windows:ci bin/windows/debug/moon_invaders.exe
+          ./godot --headless --export-release windows:ci bin/windows/release/moon_invaders.exe
+      
+      - name: Export Game - macOS
+        shell: bash
+        run: |
+          mkdir -p bin/macos/debug
+          mkdir -p bin/macos/release
+
+          ./godot --headless --export-debug macos:ci bin/macos/debug/moon_invaders.x86_64
+          ./godot --headless --export-release macos:ci bin/macos/release/moon_invaders.x86_64
+        
+      - name: Export Game - Web
+        shell: bash
+        run: |
+          mkdir -p bin/web/debug
+          mkdir -p bin/web/release
+
+          ./godot --headless --export-debug web:ci bin/web/debug/index.html
+          ./godot --headless --export-release web:ci bin/web/release/index.html
+
+      - name: Upload Artifacts - Linux Debug
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-debug
+          path: bin/linux/debug
+      
+      - name: Upload Artifacts - Linux Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-release
+          path: bin/linux/release
+      
+      - name: Upload Artifacts - Windows Debug
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-debug
+          path: bin/windows/debug
+      
+      - name: Upload Artifacts - Windows Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-release
+          path: bin/windows/release
+      
+      - name: Upload Artifacts - macOS Debug
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-debug
+          path: bin/macos/debug
+      
+      - name: Upload Artifacts - macOS Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-release
+          path: bin/macos/release
+      
+      - name: Upload Artifacts - Web Debug
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-debug
+          path: bin/web/debug
+      
+      - name: Upload Artifacts - Web Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-release
+          path: bin/web/release
+      
+      - name: Publish Game - Github Release
+        if: ${{ inputs.publish == 'true' }}
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: |
+            linux-release
+            windows-release
+            macos-release
+            web-release
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: "Moon Invaders - ${{ github.ref }}"
+          body: "This is a auto generated release"
+          draft: true
+          prerelease: true
+      
+        
+      
+
+    
