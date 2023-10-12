@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://gybsnxxx6x3f"]
+
+[ext_resource type="Shader" path="res://assets/shaders/health_bar/health_bar.gdshader" id="1_cp53s"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cp53s")
+shader_parameter/color_from = Vector4(1, 0, 0, 1)
+shader_parameter/color_to = Vector4(0, 1, 0, 1)
+shader_parameter/color_bg = null
+shader_parameter/progress = null

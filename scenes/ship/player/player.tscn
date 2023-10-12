@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciaamg8jnekl1"]
-
-[ext_resource type="PackedScene" uid="uid://6eia23dluwgi" path="res://scenes/ship/ship.tscn" id="1_xi234"]
-[ext_resource type="Script" path="res://scenes/ship/player/player.gd" id="2_h133l"]
-
-[node name="Player" instance=ExtResource("1_xi234")]
-script = ExtResource("2_h133l")
-health = 10000
-bullet_damage = 50

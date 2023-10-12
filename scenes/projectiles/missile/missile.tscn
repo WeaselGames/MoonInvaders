@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://be81tbuwykao8"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/missile/missile.gd" id="1_ukt6e"]
+[ext_resource type="Texture2D" uid="uid://bgokvnetlrabn" path="res://assets/images/projectile/missile/missile6.webp" id="2_586jc"]
+[ext_resource type="Texture2D" uid="uid://d3aj8c1k5vsct" path="res://assets/images/projectile/missile/missile7.webp" id="3_sqss2"]
+[ext_resource type="Texture2D" uid="uid://d3jeifgalw07w" path="res://assets/images/projectile/missile/missile0.webp" id="4_afh6l"]
+[ext_resource type="Texture2D" uid="uid://crknhnu6rx32l" path="res://assets/images/projectile/missile/missile1.webp" id="5_cpit1"]
+[ext_resource type="Texture2D" uid="uid://rh7l1oj0yg62" path="res://assets/images/projectile/missile/missile2.webp" id="6_femt5"]
+[ext_resource type="Texture2D" uid="uid://cpevibafoqkt5" path="res://assets/images/projectile/missile/missile3.webp" id="7_jxu67"]
+[ext_resource type="Texture2D" uid="uid://bvrb7n232umrk" path="res://assets/images/projectile/missile/missile4.webp" id="8_27kck"]
+[ext_resource type="Texture2D" uid="uid://bhrnxwtofrjxv" path="res://assets/images/projectile/missile/missile5.webp" id="9_nk18u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ir46m"]
+size = Vector2(12, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydfmc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_586jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sqss2")
+}],
+"loop": true,
+"name": &"running",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("4_afh6l")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_cpit1")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_femt5")
+}, {
+"duration": 0.25,
+"texture": ExtResource("7_jxu67")
+}, {
+"duration": 0.25,
+"texture": ExtResource("8_27kck")
+}, {
+"duration": 0.15,
+"texture": ExtResource("9_nk18u")
+}, {
+"duration": 0.5,
+"texture": ExtResource("2_586jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sqss2")
+}],
+"loop": false,
+"name": &"startup",
+"speed": 5.0
+}]
+
+[node name="Missile" type="Area2D" node_paths=PackedStringArray("animated_sprite")]
+z_index = 1
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_ukt6e")
+animated_sprite = NodePath("AnimatedSprite")
+size = Vector2i(12, 60)
+speed = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_ir46m")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_ydfmc")
+animation = &"startup"
+frame = 7
+frame_progress = 1.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]

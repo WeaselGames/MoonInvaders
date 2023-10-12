@@ -1,0 +1,11 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://umv38ue123k7"]
+
+[ext_resource type="Texture2D" uid="uid://bgokvnetlrabn" path="res://assets/images/projectile/missile/missile6.webp" id="1_dher4"]
+[ext_resource type="Texture2D" uid="uid://d3aj8c1k5vsct" path="res://assets/images/projectile/missile/missile7.webp" id="2_2cc1f"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_dher4")
+frame_0/duration = 0.15
+frame_1/texture = ExtResource("2_2cc1f")
+frame_1/duration = 0.15

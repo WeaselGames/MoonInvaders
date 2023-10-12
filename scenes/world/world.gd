@@ -1,26 +1,13 @@
 class_name World
 extends Node2D
 
-@export var ships: Node2D
-@export var asteroids: Node2D
+@export var size: Vector2 = Vector2(1000, 1000)
+@export var objects: Node2D
+@export var gravity: float = 1.62
+@export var gravity_direction: Vector2 = Vector2(0, 1)
 
-func _physics_process(_delta: float) -> void:
-	var viewport_size = get_viewport().size
-	for child in ships.get_children():
-		if child is Ship or child is Bullet:
-			if child.position.x > viewport_size.x:
-				child.position.x = 0
-			if child.position.x < 0:
-				child.position.x = viewport_size.x
-	
-	for child in asteroids.get_children():
-		if child.position.x > viewport_size.x:
-			child.position.x = 0
-		if child.position.x < 0:
-			child.position.x = viewport_size.x
-		if child.position.y > viewport_size.y:
-			child.position.y = 0
-		if child.position.y < 0:
-			child.position.y = viewport_size.y
-			
-	
+func _ready() -> void:
+	EventBus.world_ready.emit(self)
+
+func add_object(object: CollisionObject2D):
+	objects.add_child.call_deferred(object)

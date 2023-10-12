@@ -1,1 +1,1 @@
-Asset from https://opengameart.org/content/seamless-space-backgrounds
+Asset from https://opengameart.org/content/lunar-rock

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://lsk2vj0l0b08"]
+
+[ext_resource type="Script" path="res://scenes/ships/player/player.gd" id="1_mugof"]
+[ext_resource type="Texture2D" uid="uid://tmwnlgiyrk1f" path="res://assets/images/ships/player/player_ship.webp" id="2_l44dm"]
+[ext_resource type="PackedScene" uid="uid://de3ymp8rbho6h" path="res://scenes/ui/ui_elements/health_bar/health_bar.tscn" id="3_o1qvl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tana0"]
+size = Vector2(43, 33)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite")]
+z_index = 10
+scale = Vector2(2, 2)
+script = ExtResource("1_mugof")
+health_bar = NodePath("HealthBar")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_l44dm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tana0")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_o1qvl")]
+offset_left = -13.0
+offset_top = 16.8
+offset_bottom = 18.8

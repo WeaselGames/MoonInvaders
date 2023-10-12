@@ -1,0 +1,30 @@
+[gd_resource type="AnimatedTexture" load_steps=9 format=3 uid="uid://3sm6emxy46qh"]
+
+[ext_resource type="Texture2D" uid="uid://d3jeifgalw07w" path="res://assets/images/projectile/missile/missile0.webp" id="1_4lt4o"]
+[ext_resource type="Texture2D" uid="uid://crknhnu6rx32l" path="res://assets/images/projectile/missile/missile1.webp" id="2_i7p1g"]
+[ext_resource type="Texture2D" uid="uid://rh7l1oj0yg62" path="res://assets/images/projectile/missile/missile2.webp" id="3_7tmgo"]
+[ext_resource type="Texture2D" uid="uid://cpevibafoqkt5" path="res://assets/images/projectile/missile/missile3.webp" id="4_1lop4"]
+[ext_resource type="Texture2D" uid="uid://bvrb7n232umrk" path="res://assets/images/projectile/missile/missile4.webp" id="5_4p5cy"]
+[ext_resource type="Texture2D" uid="uid://bhrnxwtofrjxv" path="res://assets/images/projectile/missile/missile5.webp" id="6_o60fd"]
+[ext_resource type="Texture2D" uid="uid://bgokvnetlrabn" path="res://assets/images/projectile/missile/missile6.webp" id="7_eoiep"]
+[ext_resource type="Texture2D" uid="uid://d3aj8c1k5vsct" path="res://assets/images/projectile/missile/missile7.webp" id="8_m3m04"]
+
+[resource]
+frames = 8
+one_shot = true
+frame_0/texture = ExtResource("1_4lt4o")
+frame_0/duration = 0.15
+frame_1/texture = ExtResource("2_i7p1g")
+frame_1/duration = 0.25
+frame_2/texture = ExtResource("3_7tmgo")
+frame_2/duration = 0.15
+frame_3/texture = ExtResource("4_1lop4")
+frame_3/duration = 0.5
+frame_4/texture = ExtResource("5_4p5cy")
+frame_4/duration = 0.15
+frame_5/texture = ExtResource("6_o60fd")
+frame_5/duration = 0.15
+frame_6/texture = ExtResource("7_eoiep")
+frame_6/duration = 0.15
+frame_7/texture = ExtResource("8_m3m04")
+frame_7/duration = 0.15

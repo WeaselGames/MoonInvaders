@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://de3ymp8rbho6h"]
+
+[ext_resource type="Material" uid="uid://gybsnxxx6x3f" path="res://assets/shaders/health_bar/health_bar.tres" id="1_1cfk2"]
+[ext_resource type="Script" path="res://scenes/ui/ui_elements/health_bar/health_bar.gd" id="1_qfcmn"]
+
+[node name="HealthBar" type="ColorRect"]
+material = ExtResource("1_1cfk2")
+offset_left = -12.0
+offset_top = -1.0
+offset_right = 13.0
+offset_bottom = 1.0
+script = ExtResource("1_qfcmn")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxs7udg4v8uyq"]
+
+[ext_resource type="Script" path="res://scenes/items/helth/health.gd" id="1_8xorb"]
+[ext_resource type="Texture2D" uid="uid://c7nf2l7n0ha3v" path="res://assets/images/items/health/heart.png" id="2_nw4yg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g7hy"]
+size = Vector2(32, 32)
+
+[node name="Health" type="Area2D"]
+script = ExtResource("1_8xorb")
+item_weight = 150
+item_type = 1
+item_icon = ExtResource("2_nw4yg")
+item_size = Vector2i(32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2g7hy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nw4yg")

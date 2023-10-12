@@ -1,76 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8106ayuswq6d"]
+[gd_scene load_steps=6 format=3 uid="uid://b8106ayuswq6d"]
 
 [ext_resource type="Script" path="res://scenes/world/world.gd" id="1_qcaai"]
 [ext_resource type="Texture2D" uid="uid://dj8u3soodffrd" path="res://assets/images/world/background.png" id="2_jk8gw"]
-[ext_resource type="Script" path="res://scenes/world/asteroids.gd" id="3_2pg0b"]
-[ext_resource type="PackedScene" uid="uid://erwa0pasndb" path="res://scenes/asteroid/asteroid.tscn" id="3_ohs4e"]
-[ext_resource type="Script" path="res://scenes/world/background_camera.gd" id="3_shh6m"]
-[ext_resource type="PackedScene" uid="uid://cpj2e51gcibyu" path="res://scenes/ship/enemy/enemy.tscn" id="5_pbycj"]
-[ext_resource type="PackedScene" uid="uid://ciaamg8jnekl1" path="res://scenes/ship/player/player.tscn" id="6_pqrm4"]
+[ext_resource type="Script" path="res://scenes/world/objects.gd" id="3_1s44g"]
+[ext_resource type="PackedScene" uid="uid://bxs7udg4v8uyq" path="res://scenes/items/helth/health.tscn" id="4_ik2jr"]
+[ext_resource type="Script" path="res://scenes/ships/player/camera.gd" id="5_foa7n"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("ships", "asteroids")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("objects")]
 script = ExtResource("1_qcaai")
-ships = NodePath("Main CanvasLayer/Objects/Ships")
-asteroids = NodePath("Main CanvasLayer/Objects/Asteroids")
+size = Vector2(3500, 3500)
+objects = NodePath("Objects")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Background" type="ParallaxBackground" parent="CanvasLayer"]
 
-[node name="Layer1" type="ParallaxLayer" parent="CanvasLayer/Background"]
-motion_mirroring = Vector2(1024, 1024)
+[node name="FloorLayer" type="ParallaxLayer" parent="CanvasLayer/Background"]
+motion_mirroring = Vector2(2048, 2048)
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Background/Layer1"]
-position = Vector2(512, 512)
+[node name="MoonSurface" type="Sprite2D" parent="CanvasLayer/Background/FloorLayer"]
+position = Vector2(960, 540)
 texture = ExtResource("2_jk8gw")
 
-[node name="Layer2" type="ParallaxLayer" parent="CanvasLayer/Background"]
-motion_mirroring = Vector2(1024, 1024)
+[node name="Objects" type="Node2D" parent="."]
+script = ExtResource("3_1s44g")
+items = Array[PackedScene]([ExtResource("4_ik2jr")])
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Background/Layer2"]
-position = Vector2(2560, 512)
-texture = ExtResource("2_jk8gw")
-
-[node name="Layer3" type="ParallaxLayer" parent="CanvasLayer/Background"]
-motion_mirroring = Vector2(1024, 1024)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Background/Layer3"]
-position = Vector2(512, 2560)
-texture = ExtResource("2_jk8gw")
-
-[node name="Layer4" type="ParallaxLayer" parent="CanvasLayer/Background"]
-motion_mirroring = Vector2(1024, 1024)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Background/Layer4"]
-position = Vector2(2560, 2560)
-texture = ExtResource("2_jk8gw")
-
-[node name="BackgroundCamera" type="Camera2D" parent="CanvasLayer"]
-position = Vector2(2018, 2061)
-script = ExtResource("3_shh6m")
-scroll_speed = 100
-
-[node name="Main CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Objects" type="Node2D" parent="Main CanvasLayer"]
-
-[node name="Asteroids" type="Node2D" parent="Main CanvasLayer/Objects"]
-script = ExtResource("3_2pg0b")
-asteroid_scene = ExtResource("3_ohs4e")
-
-[node name="AsteriodSpawnTimer" type="Timer" parent="Main CanvasLayer/Objects"]
-wait_time = 20.0
-autostart = true
-
-[node name="Ships" type="Node2D" parent="Main CanvasLayer/Objects"]
-
-[node name="Player" parent="Main CanvasLayer/Objects/Ships" instance=ExtResource("6_pqrm4")]
-position = Vector2(973, 963)
-max_health = 10000
-
-[node name="Enemy" parent="Main CanvasLayer/Objects/Ships" instance=ExtResource("5_pbycj")]
-position = Vector2(983, 92.0001)
-rotation = -3.14159
-scale = Vector2(2.5, 2.5)
-
-[connection signal="timeout" from="Main CanvasLayer/Objects/AsteriodSpawnTimer" to="Main CanvasLayer/Objects/Asteroids" method="_on_asteriod_spawn_timer_timeout"]
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(0, -150)
+script = ExtResource("5_foa7n")
