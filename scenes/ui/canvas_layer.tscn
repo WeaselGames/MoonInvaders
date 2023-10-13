@@ -34,4 +34,3 @@ layout_mode = 1
 [node name="GameOverMenu" parent="Menus" instance=ExtResource("6_k28s6")]
 visible = false
 layout_mode = 1
-is_paused = true

@@ -14,6 +14,7 @@ scale = Vector2(2, 2)
 script = ExtResource("1_mugof")
 health_bar = NodePath("HealthBar")
 sprite = NodePath("Sprite2D")
+max_strafe_speed = null
 weapon_hardpoints = [NodePath("LeftPhaser"), NodePath("RighPhaser"), NodePath("CenterMissile")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

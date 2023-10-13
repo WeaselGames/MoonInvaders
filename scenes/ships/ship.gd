@@ -11,8 +11,7 @@ extends CharacterBody2D
 
 @export var max_health: int = 100
 
-@export var max_speed: int = 200
-@export var max_strafe_speed: int = 100
+@export var max_speed: int = 400
 @export var friction: int = 10
 @export var acceleration: int = 15
 @export var yaw_acceleration: float = 1
@@ -90,7 +89,9 @@ func _physics_process(delta: float) -> void:
 	if input.thrust == 0 and input.strafe == 0:
 		velocity = velocity.move_toward(Vector2(0, 0), friction) 
 	else:
-		velocity = velocity.move_toward(Vector2(input.strafe * max_strafe_speed, input.thrust * max_speed).rotated(rotation), acceleration)
+		velocity = velocity.move_toward(Vector2(input.strafe * max_speed, input.thrust * max_speed).rotated(rotation), acceleration)
+	
+	velocity = velocity.limit_length(max_speed)
 	
 	move_and_slide()
 
