@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bqhu74bk858wj"]
+
+[ext_resource type="Shader" path="res://assets/shaders/ui/weapon_status/weapon_status.gdshader" id="1_bhft8"]
+
+[resource]
+shader = ExtResource("1_bhft8")
+shader_parameter/progress = null

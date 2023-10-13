@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://3muskpfron44"]
+
+[ext_resource type="Script" path="res://scenes/items/ammo/phaser_ammo/phaser_ammo.gd" id="1_muxvb"]
+[ext_resource type="PackedScene" uid="uid://ceyv85t3m1p4r" path="res://scenes/projectiles/phaser/phaser.tscn" id="2_fbv8e"]
+[ext_resource type="Texture2D" uid="uid://bo5sa3pbjcufm" path="res://assets/images/projectile/phaser/red_02.png" id="4_yq24i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opxcc"]
+size = Vector2(17, 156)
+
+[node name="PhaserAmmo" type="Area2D"]
+script = ExtResource("1_muxvb")
+projectile_scene = ExtResource("2_fbv8e")
+projectile_count = -1
+item_icon = ExtResource("4_yq24i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 9)
+shape = SubResource("RectangleShape2D_opxcc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("4_yq24i")

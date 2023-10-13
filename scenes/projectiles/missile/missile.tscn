@@ -62,7 +62,9 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("1_ukt6e")
 animated_sprite = NodePath("AnimatedSprite")
 size = Vector2i(12, 60)
+life_span = 20
 speed = 100
+projectile_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)

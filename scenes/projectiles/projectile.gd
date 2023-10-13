@@ -1,23 +1,25 @@
 class_name Projectile
 extends Area2D
 
+enum ProjectileType {PHASER, MISSILE}
+
 @export var size: Vector2i = Vector2i(5, 20)
 @export var damage: int = 50
 @export var life_span: int = 5
 @export var speed: int = 500
+@export var cooldown: int = 100
+@export var projectile_type: ProjectileType
 
 var velocity: Vector2 = Vector2.ZERO
-var exited: bool = false
-
+var origin: Ship
 
 func _ready() -> void:
 	var timer = Timer.new()
 	timer.timeout.connect(self._on_timer_timeout)
+	timer.one_shot = true
 	add_child(timer)
-	timer.start()
-	
-	await body_exited
-	exited = true
+	timer.start(life_span)
+	body_entered.connect(self._on_body_entered)
 
 func _physics_process(delta: float) -> void:
 	if GameState.paused:
@@ -27,10 +29,7 @@ func _physics_process(delta: float) -> void:
 	position += velocity * delta
 
 func _on_body_entered(body: Node2D) -> void:
-	if not exited:
-		return
-	
-	if body is Ship:
+	if body is Ship && body != origin:
 		body.apply_damage(damage)
 		queue_free()
 

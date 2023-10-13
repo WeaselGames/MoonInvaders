@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlwb16yqdtgtb"]
+
+[ext_resource type="Script" path="res://scenes/items/ammo/ammo_item.gd" id="1_44jtn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utth4"]
+
+[node name="AmmoItem" type="Area2D"]
+script = ExtResource("1_44jtn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_utth4")

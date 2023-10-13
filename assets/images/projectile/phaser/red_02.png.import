@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0si2aupdqaof"
-path="res://.godot/imported/projectile.webp-a2911779084e71e11e41c51bef2269ea.ctex"
+uid="uid://bo5sa3pbjcufm"
+path="res://.godot/imported/red_02.png-fd58fca7fae36efb80352cbfdbcff0ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/projectile/projectile.webp"
-dest_files=["res://.godot/imported/projectile.webp-a2911779084e71e11e41c51bef2269ea.ctex"]
+source_file="res://assets/images/projectile/phaser/red_02.png"
+dest_files=["res://.godot/imported/red_02.png-fd58fca7fae36efb80352cbfdbcff0ae.ctex"]
 
 [params]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8106ayuswq6d"]
+[gd_scene load_steps=7 format=3 uid="uid://b8106ayuswq6d"]
 
 [ext_resource type="Script" path="res://scenes/world/world.gd" id="1_qcaai"]
 [ext_resource type="Texture2D" uid="uid://dj8u3soodffrd" path="res://assets/images/world/background.png" id="2_jk8gw"]
 [ext_resource type="Script" path="res://scenes/world/objects.gd" id="3_1s44g"]
 [ext_resource type="PackedScene" uid="uid://bxs7udg4v8uyq" path="res://scenes/items/helth/health.tscn" id="4_ik2jr"]
-[ext_resource type="Script" path="res://scenes/ships/player/camera.gd" id="5_foa7n"]
+[ext_resource type="Script" path="res://scenes/world/camera.gd" id="5_8hv6i"]
+[ext_resource type="PackedScene" uid="uid://c5gppqo8phv1n" path="res://scenes/items/ammo/missile_ammo/missile_ammo.tscn" id="5_i3sb7"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("objects")]
 script = ExtResource("1_qcaai")
@@ -24,8 +25,8 @@ texture = ExtResource("2_jk8gw")
 
 [node name="Objects" type="Node2D" parent="."]
 script = ExtResource("3_1s44g")
-items = Array[PackedScene]([ExtResource("4_ik2jr")])
+items = Array[PackedScene]([ExtResource("4_ik2jr"), ExtResource("5_i3sb7")])
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(0, -150)
-script = ExtResource("5_foa7n")
+script = ExtResource("5_8hv6i")

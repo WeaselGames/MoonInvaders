@@ -14,3 +14,9 @@ func _world_ready(_world: World):
 
 func _player_ready(_player: Player):
 	self.player = _player
+
+func pause_game() -> void:
+	paused = true
+
+func resume_game() -> void:
+	paused = false

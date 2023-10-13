@@ -12,6 +12,7 @@ func _on_world_ready(_world: World) -> void:
 
 func _on_player_ready(_player: Player) -> void:
 	self.player = _player
+	next_wave()
 
 func _on_enemy_destroyed(enemy: Enemy) -> void:
 	enemies.erase(enemy)
@@ -34,7 +35,6 @@ func _ready() -> void:
 func set_starting_position(enemy: Enemy, n: int, count: int) -> void:
 	enemy.position.y = player.position.y - 500
 	enemy.position.x = player.position.x + (get_viewport().size.x / count) * n
-	
 
 func next_wave() -> void:
 	wave += 1

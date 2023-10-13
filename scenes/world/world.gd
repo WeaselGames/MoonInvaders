@@ -11,3 +11,6 @@ func _ready() -> void:
 
 func add_object(object: CollisionObject2D):
 	objects.add_child.call_deferred(object)
+
+func remove_object(object: CollisionObject2D):
+	objects.remove_child.call_deferred(object)

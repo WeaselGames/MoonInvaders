@@ -10,7 +10,6 @@ func _on_resume_pressed() -> void:
 func _on_quit_pressed() -> void:
 	EventBus.quit_game.emit()
 
-
 func _input(_event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if GameState.paused:

@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://cckbbxx52a1s2"]
+[gd_scene load_steps=5 format=3 uid="uid://cckbbxx52a1s2"]
 
-[node name="Main" type="Node2D"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_rxf7e"]
+[ext_resource type="PackedScene" uid="uid://b8106ayuswq6d" path="res://scenes/world/world.tscn" id="2_ge7ev"]
+[ext_resource type="PackedScene" uid="uid://tv78msbkxshj" path="res://scenes/ui/canvas_layer.tscn" id="2_sx2r0"]
+[ext_resource type="PackedScene" uid="uid://lsk2vj0l0b08" path="res://scenes/ships/player/player.tscn" id="3_10f6b"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ui_canvas_layer")]
+script = ExtResource("1_rxf7e")
+world_scene = ExtResource("2_ge7ev")
+player_scene = ExtResource("3_10f6b")
+ui_canvas_layer = NodePath("UILayer")
+
+[node name="UILayer" parent="." instance=ExtResource("2_sx2r0")]

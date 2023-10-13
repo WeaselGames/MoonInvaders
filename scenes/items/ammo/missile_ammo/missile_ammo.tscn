@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gppqo8phv1n"]
+
+[ext_resource type="Script" path="res://scenes/items/ammo/missile_ammo/missile_ammo.gd" id="1_jjift"]
+[ext_resource type="PackedScene" uid="uid://be81tbuwykao8" path="res://scenes/projectiles/missile/missile.tscn" id="2_kuvrw"]
+[ext_resource type="Texture2D" uid="uid://d3jeifgalw07w" path="res://assets/images/projectile/missile/missile0.webp" id="3_jvm7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6ijy"]
+size = Vector2(60, 10)
+
+[node name="MissileAmmo" type="Area2D"]
+script = ExtResource("1_jjift")
+projectile_scene = ExtResource("2_kuvrw")
+projectile_type = 1
+projectile_count = 5
+item_icon = ExtResource("3_jvm7e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 0)
+shape = SubResource("RectangleShape2D_x6ijy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_jvm7e")

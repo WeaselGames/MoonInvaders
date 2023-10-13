@@ -1,19 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqfgwqqpwrg51"]
+[gd_scene load_steps=6 format=3 uid="uid://cqfgwqqpwrg51"]
 
 [ext_resource type="Script" path="res://scenes/ships/enemy/enemy.gd" id="1_w35kq"]
 [ext_resource type="Texture2D" uid="uid://dua5c2gcufo14" path="res://assets/images/ships/enemy/enemy_ship.webp" id="2_fsep2"]
 [ext_resource type="PackedScene" uid="uid://de3ymp8rbho6h" path="res://scenes/ui/ui_elements/health_bar/health_bar.tscn" id="3_rgjex"]
+[ext_resource type="PackedScene" uid="uid://dsg7rv0et4eym" path="res://scenes/ships/hardpoint.tscn" id="4_asdpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n63kb"]
 size = Vector2(33, 39)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite", "weapon_hardpoints")]
 z_index = 10
 scale = Vector2(2, 2)
 script = ExtResource("1_w35kq")
 health_bar = NodePath("HealthBar")
 sprite = NodePath("Sprite2D")
-ship_direction = 1
+weapon_hardpoints = [NodePath("LeftPhaser"), NodePath("RightPhaser"), NodePath("CenterMissile")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n63kb")
@@ -25,3 +26,13 @@ texture = ExtResource("2_fsep2")
 offset_left = -13.0
 offset_top = -22.0
 offset_bottom = -20.0
+
+[node name="LeftPhaser" parent="." instance=ExtResource("4_asdpv")]
+position = Vector2(-8, 0)
+
+[node name="RightPhaser" parent="." instance=ExtResource("4_asdpv")]
+position = Vector2(8, 0)
+
+[node name="CenterMissile" parent="." instance=ExtResource("4_asdpv")]
+position = Vector2(0, 2.5)
+hardpoint_type = 1

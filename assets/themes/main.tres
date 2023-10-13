@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://7u3vc13ppdl0"]
+
+[ext_resource type="FontFile" uid="uid://drxtf8blqxxh1" path="res://assets/fonts/pixel_code/PixelCode.otf" id="1_gmgni"]
+
+[resource]
+default_font = ExtResource("1_gmgni")

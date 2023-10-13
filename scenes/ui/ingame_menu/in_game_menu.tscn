@@ -1,15 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdffr8ebg4185"]
+[gd_scene load_steps=5 format=3 uid="uid://bdffr8ebg4185"]
 
+[ext_resource type="Theme" uid="uid://7u3vc13ppdl0" path="res://assets/themes/main.tres" id="1_8huc8"]
 [ext_resource type="Script" path="res://scenes/ui/ingame_menu/in_game_menu.gd" id="1_i16p7"]
+[ext_resource type="Material" uid="uid://bqhu74bk858wj" path="res://assets/shaders/ui/weapon_status/weapon_status.tres" id="2_5so6c"]
+[ext_resource type="Texture2D" uid="uid://d3jeifgalw07w" path="res://assets/images/projectile/missile/missile0.webp" id="3_2xonv"]
 
-[node name="InGameMenu" type="Control"]
+[node name="InGameMenu" type="Control" node_paths=PackedStringArray("weapon_status", "ammo_count")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_8huc8")
 script = ExtResource("1_i16p7")
+weapon_status = NodePath("VBoxContainer/HBoxContainer/WeaponStatus")
+ammo_count = NodePath("VBoxContainer/HBoxContainer/AmmoCount")
 menu_type = 1
 is_paused = false
 
@@ -25,16 +31,36 @@ alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
 
-[node name="Lifes" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="WeaponStatus" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+material = ExtResource("2_5so6c")
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-size_flags_vertical = 1
+texture = ExtResource("3_2xonv")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="X" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.501961, 1)
+theme_override_font_sizes/font_size = 32
+text = "X"
+
+[node name="AmmoCount" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Lifes: 4"
+text = "003"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
 
 [node name="Bottom" type="Control" parent="VBoxContainer"]
 layout_mode = 2

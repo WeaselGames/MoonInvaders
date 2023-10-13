@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://tv78msbkxshj"]
+[gd_scene load_steps=7 format=3 uid="uid://tv78msbkxshj"]
 
 [ext_resource type="PackedScene" uid="uid://crgtj35jqtj6u" path="res://scenes/ui/main_menu/main_menu.tscn" id="1_1kb53"]
 [ext_resource type="Script" path="res://scenes/ui/canvas_layer.gd" id="1_h1kgl"]
+[ext_resource type="Theme" uid="uid://7u3vc13ppdl0" path="res://assets/themes/main.tres" id="2_6ii1c"]
 [ext_resource type="PackedScene" uid="uid://bdffr8ebg4185" path="res://scenes/ui/ingame_menu/in_game_menu.tscn" id="3_v6532"]
 [ext_resource type="PackedScene" uid="uid://dcetag1pxogfk" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="4_uikms"]
+[ext_resource type="PackedScene" uid="uid://cr6om5kgw7xi7" path="res://scenes/ui/gameover_menu/game_over_menu.tscn" id="6_k28s6"]
 
 [node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("menus")]
 script = ExtResource("1_h1kgl")
@@ -16,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_6ii1c")
 
 [node name="MainMenu" parent="Menus" instance=ExtResource("1_1kb53")]
 layout_mode = 1
@@ -27,3 +30,8 @@ layout_mode = 1
 [node name="PauseMenu" parent="Menus" instance=ExtResource("4_uikms")]
 visible = false
 layout_mode = 1
+
+[node name="GameOverMenu" parent="Menus" instance=ExtResource("6_k28s6")]
+visible = false
+layout_mode = 1
+is_paused = true

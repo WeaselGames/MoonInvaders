@@ -1,35 +1,24 @@
 class_name Item
 extends Area2D
 
-enum ItemType {PROJECTILE, HEALTH, POWERUP}
+enum ItemType {AMMO, HEALTH, POWERUP}
 
-@export var item_weight: int = 100
+@export var item_lifespan: int = 30
+
 @export var item_type: ItemType
 @export var item_icon: Texture2D
-@export var item_size: Vector2i
 
-var world := GameState.world
-var player := GameState.player
+var velocity: Vector2 = Vector2.ZERO
 
-var velocity := Vector2.ZERO
+var lifespan_timer: Timer
 
 func _ready() -> void:
-	if world == null:
-		world = await EventBus.world_ready
-	if player == null:
-		player = await EventBus.player_ready
-	
 	body_entered.connect(self._on_body_entered)
-
-func _physics_process(delta: float) -> void:
-	if GameState.paused:
-		return
-	
-	if player == null:
-		return
-	
-	velocity = velocity.move_toward(world.gravity_direction * item_weight, world.gravity)
-	position += velocity * delta
+	lifespan_timer = Timer.new()
+	lifespan_timer.one_shot = true
+	add_child(lifespan_timer)
+	lifespan_timer.start(item_lifespan)
+	lifespan_timer.timeout.connect(self.queue_free)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
