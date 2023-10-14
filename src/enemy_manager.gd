@@ -16,7 +16,6 @@ func _on_player_ready(_player: Player) -> void:
 
 func _on_enemy_destroyed(enemy: Enemy) -> void:
 	enemies.erase(enemy)
-	enemy.queue_free()
 	if enemies.size() == 0:
 		next_wave()
 

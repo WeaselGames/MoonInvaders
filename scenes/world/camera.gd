@@ -9,10 +9,11 @@ func _ready():
 	EventBus.player_ready.connect(self._on_player_ready)
 
 func _on_world_ready(world: World):
-	limit_left = -int(world.size.x / 2.0)
-	limit_right = int(world.size.x / 2.0)
-	limit_top = -int(world.size.y / 2.0)
-	limit_bottom = int(world.size.y / 2.0)
+#	limit_left = -int(world.size.x / 2.0)
+#	limit_right = int(world.size.x / 2.0)
+#	limit_top = -int(world.size.y / 2.0)
+#	limit_bottom = int(world.size.y / 2.0)
+	pass
 
 func _on_player_ready(_player: Player):
 	self.player = _player

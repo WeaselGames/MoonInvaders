@@ -17,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 	var world_y = int(world_size.y/2.0)
 
 	for child in get_children():
-		if child is Ship:
+		if child is Ship or child is Projectile:
 			if child.position.x > world_x:
 				child.position.x = -world_x
 			if child.position.x < -world_x:
@@ -27,16 +27,7 @@ func _physics_process(_delta: float) -> void:
 				child.position.y = -world_y
 			if child.position.y < -world_y:
 				child.position.y = world_y
-		elif child is Projectile:
-			if child.position.x > world_x:
-				child.position.x = -world_x
-			if child.position.x < -world_x:
-				child.position.x = world_x
 			
-			if child.position.y > world_y:
-				child.queue_free()
-			if child.position.y < -world_y:
-				child.queue_free()
 		elif child is Item:
 			if child.position.x > world_x:
 				child.queue_free()

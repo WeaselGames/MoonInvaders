@@ -8,13 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n63kb"]
 size = Vector2(33, 39)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite", "weapon_hardpoints")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite")]
 z_index = 10
-scale = Vector2(2, 2)
 script = ExtResource("1_w35kq")
 health_bar = NodePath("HealthBar")
 sprite = NodePath("Sprite2D")
-weapon_hardpoints = [NodePath("LeftPhaser"), NodePath("RightPhaser"), NodePath("CenterMissile")]
+max_speed = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n63kb")

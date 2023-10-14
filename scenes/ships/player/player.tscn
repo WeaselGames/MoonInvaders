@@ -10,11 +10,9 @@ size = Vector2(43, 33)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_bar", "sprite", "weapon_hardpoints")]
 z_index = 10
-scale = Vector2(2, 2)
 script = ExtResource("1_mugof")
 health_bar = NodePath("HealthBar")
 sprite = NodePath("Sprite2D")
-max_strafe_speed = null
 weapon_hardpoints = [NodePath("LeftPhaser"), NodePath("RighPhaser"), NodePath("CenterMissile")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

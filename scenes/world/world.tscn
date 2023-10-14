@@ -17,10 +17,11 @@ objects = NodePath("Objects")
 [node name="Background" type="ParallaxBackground" parent="CanvasLayer"]
 
 [node name="FloorLayer" type="ParallaxLayer" parent="CanvasLayer/Background"]
+position = Vector2(-2048, -2048)
 motion_mirroring = Vector2(2048, 2048)
 
 [node name="MoonSurface" type="Sprite2D" parent="CanvasLayer/Background/FloorLayer"]
-position = Vector2(960, 540)
+position = Vector2(1024, 1024)
 texture = ExtResource("2_jk8gw")
 
 [node name="Objects" type="Node2D" parent="."]
@@ -28,5 +29,4 @@ script = ExtResource("3_1s44g")
 items = Array[PackedScene]([ExtResource("4_ik2jr"), ExtResource("5_i3sb7")])
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-position = Vector2(0, -150)
 script = ExtResource("5_8hv6i")

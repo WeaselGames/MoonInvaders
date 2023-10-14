@@ -7,6 +7,7 @@
 size = Vector2(18, 32)
 
 [node name="Phaser" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_4enjs")
 damage = 25
 speed = 1000

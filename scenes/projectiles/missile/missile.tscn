@@ -58,7 +58,7 @@ animations = [{
 
 [node name="Missile" type="Area2D" node_paths=PackedStringArray("animated_sprite")]
 z_index = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.375, 0.375)
 script = ExtResource("1_ukt6e")
 animated_sprite = NodePath("AnimatedSprite")
 size = Vector2i(12, 60)

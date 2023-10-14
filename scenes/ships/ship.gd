@@ -23,16 +23,13 @@ signal damage_taken(current_health: int, max_health: int)
 signal weapon_fired(ammo: Ammo, cooldown: float, cooldown_timer: Timer)
 signal ammo_changed(ammo: Ammo)
 
-class ShipInput:
-	var fire: bool = false
-	var weapons_up: bool = false
-	var weapons_down: bool = false
+var weapons_fire: bool = false
+var weapons_up: bool = false
+var weapons_down: bool = false
 
-	var thrust: float
-	var yaw: float
-	var strafe: float
-
-var input: ShipInput = ShipInput.new()
+var thrust: float
+var yaw: float
+var strafe: float
 
 var ammo: Array[Ammo]
 var ammo_index := 0 :
@@ -74,40 +71,46 @@ func _ready() -> void:
 	health = max_health
 	var default_ammo: Ammo = Ammo.new(default_ammo_icon, default_ammo_scene, Projectile.ProjectileType.PHASER, -1)
 	ammo.append(default_ammo)
+	_ship_ready()
+
+func _ship_ready() -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	if GameState.paused:
 		return
 	
-	if input.yaw == 0:
+	if yaw == 0:
 		rotation_velocity = move_toward(rotation_velocity, 0, friction)
 	else:
-		rotation_velocity = move_toward(rotation_velocity, input.yaw * yaw_max_speed, yaw_acceleration)
+		rotation_velocity = move_toward(rotation_velocity, yaw * yaw_max_speed, yaw_acceleration)
 	
 	rotation += rotation_velocity * delta
 	
-	if input.thrust == 0 and input.strafe == 0:
+	if thrust == 0 and strafe == 0:
 		velocity = velocity.move_toward(Vector2(0, 0), friction) 
 	else:
-		velocity = velocity.move_toward(Vector2(input.strafe * max_speed, input.thrust * max_speed).rotated(rotation), acceleration)
+		velocity = velocity.move_toward(Vector2(strafe * max_speed, thrust * max_speed).rotated(rotation), acceleration)
 	
 	velocity = velocity.limit_length(max_speed)
 	
 	move_and_slide()
 
 func _process(_delta: float) -> void:
-	if input.weapons_up:
+	update_input()
+
+	if weapons_up:
 		ammo_index += 1
 		ammo_changed.emit(ammo[ammo_index])
-		input.weapons_up = false
-	if input.weapons_down:
+		weapons_up = false
+	if weapons_down:
 		ammo_index -= 1
 		ammo_changed.emit(ammo[ammo_index])
-		input.weapons_down = false
+		weapons_down = false
 
-	if input.fire:
+	if weapons_fire:
 		fire()
-		input.fire = false
+		weapons_fire = false
 
 func fire() -> void:
 	if weapon_cooldown.time_left > 0:
@@ -131,8 +134,8 @@ func fire() -> void:
 		ammo_index -= 1
 		ammo_changed.emit(ammo[ammo_index])
 
-func get_input() -> ShipInput:
-	return input
+func update_input() -> void:
+	pass
 
 func apply_damage(damage: int) -> void:
 	health -= damage

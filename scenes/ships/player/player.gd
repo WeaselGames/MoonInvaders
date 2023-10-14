@@ -1,19 +1,18 @@
 class_name Player
 extends Ship
 
-func _ready() -> void:
-	super._ready()
+func _ship_ready() -> void:
 	EventBus.player_ready.emit(self)
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("spaceship_fire"):
-		input.fire = true
+func update_input() -> void:
+	if Input.is_action_pressed("spaceship_fire"):
+		weapons_fire = true
 
-	input.strafe = Input.get_axis("spaceship_strafe_left", "spaceship_strafe_right")
-	input.thrust = Input.get_axis("spaceship_forward", "spaceship_backward")
-	input.yaw = Input.get_axis("spaceship_rotate_left", "spaceship_rotate_right")
-	input.weapons_up = Input.is_action_pressed("spaceship_weapons_up")
-	input.weapons_down = Input.is_action_pressed("spaceship_weapons_down")
+	strafe = Input.get_axis("spaceship_strafe_left", "spaceship_strafe_right")
+	thrust = Input.get_axis("spaceship_forward", "spaceship_backward")
+	yaw = Input.get_axis("spaceship_rotate_left", "spaceship_rotate_right")
+	weapons_up = Input.is_action_just_pressed("spaceship_weapons_up")
+	weapons_down = Input.is_action_just_pressed("spaceship_weapons_down")
 
 func pickup_item(item: Item) -> void:
 	match item.item_type:
