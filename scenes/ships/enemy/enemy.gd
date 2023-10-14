@@ -24,7 +24,8 @@ func update_input():
 	thrust = 0
 	strafe = 0
 	
-	var target_yaw: float = position.angle_to(_player.position)
+	#var target_yaw: float = position.angle_to(_player.position)
+	var target_yaw: float = find_angle()
 	var angle_difference: float = target_yaw - rotation
 	if abs(angle_difference) > deg_to_rad(1):
 		ai_state = EnemyAIState.AIM_AT_PLAYER
@@ -53,3 +54,15 @@ func update_input():
 			if abs(angle_difference) > deg_to_rad(1):
 				ai_state = EnemyAIState.AIM_AT_PLAYER
 
+# Finds angle between enemy and player
+func find_angle():
+	var delX: float = _player.position.x - position.x
+	var delY: float = _player.position.y - position.y
+	var modifier: float = 0
+	if delY > 0 and delX < 0:
+		print(rad_to_deg(-atan(delX / delY) - PI))
+		return -atan(delX / delY) - PI
+	elif delY < 0:
+		return -atan(delX / delY)
+	else:
+		return -atan(delX / delY) + PI
