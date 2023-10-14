@@ -25,25 +25,31 @@ func update_input():
 	strafe = 0
 	
 	#var target_yaw: float = position.angle_to(_player.position)
-	var target_yaw: float = find_angle()
-	var angle_difference: float = target_yaw - rotation
-	if abs(angle_difference) > deg_to_rad(1):
+	var angle_to_player: float = find_player_angle()
+	var angle_difference: float = angle_to_player - rotation
+	if abs(angle_difference) > deg_to_rad(10):
 		ai_state = EnemyAIState.AIM_AT_PLAYER
 
 	match ai_state:
 		EnemyAIState.MOVE_TO_PLAYER:
-			if abs(angle_difference) > deg_to_rad(1):
-				ai_state = EnemyAIState.AIM_AT_PLAYER
+			var input_vector: Vector2 = Vector2(0, -1).rotated(angle_difference)
+				
+			thrust = input_vector.y
+			strafe = input_vector.x
+			
 		
 		EnemyAIState.AIM_AT_PLAYER:
 			if abs(angle_difference) > deg_to_rad(1):
-				# Rotate towards the player
-				if angle_difference > 0:
+				if angle_difference > 1 && rotation < 0:
+					yaw = -1
+				elif angle_difference < -1 && rotation > 0:
+					yaw = 1
+				elif angle_difference > 0:
 					yaw = 1
 				else:
 					yaw = -1
 			
-			if abs(angle_difference) < deg_to_rad(1):
+			if abs(angle_difference) < deg_to_rad(5):
 				# Check if the player is within firing range
 				if position.distance_to(_player.position) < 100:
 					ai_state = EnemyAIState.FIRE_AT_PLAYER
@@ -51,18 +57,11 @@ func update_input():
 					ai_state = EnemyAIState.MOVE_TO_PLAYER
 		
 		EnemyAIState.FIRE_AT_PLAYER:
-			if abs(angle_difference) > deg_to_rad(1):
-				ai_state = EnemyAIState.AIM_AT_PLAYER
+			pass
 
-# Finds angle between enemy and player
-func find_angle():
-	var delX: float = _player.position.x - position.x
-	var delY: float = _player.position.y - position.y
-	var modifier: float = 0
-	if delY > 0 and delX < 0:
-		print(rad_to_deg(-atan(delX / delY) - PI))
-		return -atan(delX / delY) - PI
-	elif delY < 0:
-		return -atan(delX / delY)
-	else:
-		return -atan(delX / delY) + PI
+func find_player_angle() -> float:
+	var angle = position.angle_to_point(_player.position)
+	angle += PI/2
+	if angle > PI:
+		angle -= PI*2
+	return angle
