@@ -9,7 +9,6 @@
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("objects")]
 script = ExtResource("1_qcaai")
-size = Vector2(3500, 3500)
 objects = NodePath("Objects")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

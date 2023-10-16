@@ -1,7 +1,6 @@
 class_name World
 extends Node2D
 
-@export var size: Vector2 = Vector2(1000, 1000)
 @export var objects: Node2D
 @export var gravity: float = 1.62
 @export var gravity_direction: Vector2 = Vector2(0, 1)

@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 	if thrust == 0 and strafe == 0:
 		velocity = velocity.move_toward(Vector2(0, 0), friction) 
 	else:
-		velocity = velocity.move_toward(Vector2(strafe * max_speed, thrust * max_speed).rotated(rotation), acceleration)
+		velocity = velocity.move_toward(Vector2(thrust * max_speed, strafe * max_speed).rotated(rotation), acceleration)
 	
 	velocity = velocity.limit_length(max_speed)
 	
@@ -137,9 +137,13 @@ func fire() -> void:
 func update_input() -> void:
 	pass
 
-func apply_damage(damage: int) -> void:
+func apply_damage(origin: Vector2, damage: int) -> void:
 	health -= damage
 	damage_taken.emit(health, max_health)
+	damage_from(origin)
+
+func damage_from(_origin: Vector2) -> void:
+	pass
 
 func ship_destroyed() -> void:
 	queue_free()

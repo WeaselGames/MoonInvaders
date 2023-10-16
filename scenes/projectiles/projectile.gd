@@ -12,6 +12,7 @@ enum ProjectileType {PHASER, MISSILE}
 
 var velocity: Vector2 = Vector2.ZERO
 var origin: Ship
+var origin_position: Vector2
 
 func _ready() -> void:
 	var timer = Timer.new()
@@ -20,6 +21,7 @@ func _ready() -> void:
 	add_child(timer)
 	timer.start(life_span)
 	body_entered.connect(self._on_body_entered)
+	origin_position = position
 
 func _physics_process(delta: float) -> void:
 	if GameState.paused:
@@ -30,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Ship && body != origin:
-		body.apply_damage(damage)
+		body.apply_damage(origin_position, damage)
 		queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

@@ -9,7 +9,7 @@ func update_input() -> void:
 		weapons_fire = true
 
 	strafe = Input.get_axis("spaceship_strafe_left", "spaceship_strafe_right")
-	thrust = Input.get_axis("spaceship_forward", "spaceship_backward")
+	thrust = Input.get_axis("spaceship_backward", "spaceship_forward")
 	yaw = Input.get_axis("spaceship_rotate_left", "spaceship_rotate_right")
 	weapons_up = Input.is_action_just_pressed("spaceship_weapons_up")
 	weapons_down = Input.is_action_just_pressed("spaceship_weapons_down")
