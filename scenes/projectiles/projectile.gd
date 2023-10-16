@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	if GameState.paused:
 		return
 		
-	rotation = velocity.angle() + PI / 2
+	rotation = velocity.angle()
 	position += velocity * delta
 
 func _on_body_entered(body: Node2D) -> void:

@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @export var default_ammo_scene := preload("res://scenes/projectiles/phaser/phaser.tscn")
 @export var default_ammo_icon := preload("res://assets/images/projectile/phaser/red_02.png")
+@export var default_ammo_type: Projectile.ProjectileType = Projectile.ProjectileType.PHASER
 
 @export var health_bar: HealthBar
 @export var sprite: Sprite2D
@@ -69,7 +70,7 @@ func _ready() -> void:
 	add_child(weapon_cooldown)
 	
 	health = max_health
-	var default_ammo: Ammo = Ammo.new(default_ammo_icon, default_ammo_scene, Projectile.ProjectileType.PHASER, -1)
+	var default_ammo: Ammo = Ammo.new(default_ammo_icon, default_ammo_scene, default_ammo_type, -1)
 	ammo.append(default_ammo)
 	_ship_ready()
 

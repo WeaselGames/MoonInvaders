@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://be81tbuwykao8"]
+[gd_scene load_steps=13 format=3 uid="uid://be81tbuwykao8"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/missile/missile.gd" id="1_ukt6e"]
 [ext_resource type="Texture2D" uid="uid://bgokvnetlrabn" path="res://assets/images/projectile/missile/missile6.webp" id="2_586jc"]
@@ -9,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cpevibafoqkt5" path="res://assets/images/projectile/missile/missile3.webp" id="7_jxu67"]
 [ext_resource type="Texture2D" uid="uid://bvrb7n232umrk" path="res://assets/images/projectile/missile/missile4.webp" id="8_27kck"]
 [ext_resource type="Texture2D" uid="uid://bhrnxwtofrjxv" path="res://assets/images/projectile/missile/missile5.webp" id="9_nk18u"]
+[ext_resource type="PackedScene" uid="uid://dvamksc1tkhj1" path="res://scenes/util/vision_cone.tscn" id="10_o07cp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ir46m"]
-size = Vector2(12, 60)
+size = Vector2(58.6667, 12)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydfmc"]
 animations = [{
@@ -56,26 +57,33 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Missile" type="Area2D" node_paths=PackedStringArray("animated_sprite")]
+[node name="Missile" type="Area2D" node_paths=PackedStringArray("animated_sprite", "vision_cone")]
 z_index = 1
 scale = Vector2(0.375, 0.375)
+collision_layer = 19
+collision_mask = 16
 script = ExtResource("1_ukt6e")
 animated_sprite = NodePath("AnimatedSprite")
+vision_cone = NodePath("VisionCone")
 size = Vector2i(12, 60)
 life_span = 20
-speed = 100
+speed = 1000
 projectile_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(5.33333, 0)
 shape = SubResource("RectangleShape2D_ir46m")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_ydfmc")
 animation = &"startup"
 frame = 7
 frame_progress = 1.0
+
+[node name="VisionCone" parent="." instance=ExtResource("10_o07cp")]
+position = Vector2(34.6667, 0)
+width = 300
+height = 400
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]

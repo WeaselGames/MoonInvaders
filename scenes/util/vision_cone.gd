@@ -38,6 +38,12 @@ extends Area2D
 			color = value
 			queue_redraw()
 
+@export var visulaize: bool = true :
+	set(value):
+		visulaize = value
+		queue_redraw()
+		
+
 func _ready() -> void:
 	change_size()
 
@@ -59,7 +65,8 @@ func change_size() -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	draw_line(Vector2(0, 0), Vector2(height, width / 2.0), color, -1)
-	draw_line(Vector2(0, 0), Vector2(height, -(width / 2.0)), color, -1)
-	draw_line(Vector2(height, width / 2.0), Vector2(height, -(width / 2.0)), color, -1)
-	draw_arc(Vector2(0, 0), peripheral_radious, 0, TAU, peripheral_indicator_points, color)
+	if visulaize:
+		draw_line(Vector2(0, 0), Vector2(height, width / 2.0), color, -1)
+		draw_line(Vector2(0, 0), Vector2(height, -(width / 2.0)), color, -1)
+		draw_line(Vector2(height, width / 2.0), Vector2(height, -(width / 2.0)), color, -1)
+		draw_arc(Vector2(0, 0), peripheral_radious, 0, TAU, peripheral_indicator_points, color)

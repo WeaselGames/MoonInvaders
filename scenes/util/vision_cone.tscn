@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvamksc1tkhj1"]
 
-[ext_resource type="Script" path="res://scenes/ships/enemy/vision_cone.gd" id="1_uj4p1"]
+[ext_resource type="Script" path="res://scenes/util/vision_cone.gd" id="1_mwsio"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6307"]
-radius = 250.0
+radius = 60.0
 
 [node name="VisionCone" type="Area2D" node_paths=PackedStringArray("collision_polygon", "collision_shape")]
 collision_layer = 3
 collision_mask = 8
-script = ExtResource("1_uj4p1")
+script = ExtResource("1_mwsio")
 width = 600
 height = 600
 peripheral_radious = 60

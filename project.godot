@@ -83,6 +83,7 @@ spaceship_weapons_down={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Items"
 2d_physics/layer_4="Vision"
+2d_physics/layer_5="Projectiles"
 
 [rendering]
 

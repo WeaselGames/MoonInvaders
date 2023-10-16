@@ -4,13 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://hvuku7lpqby1" path="res://assets/images/projectile/phaser/red_01.png" id="2_ykxrp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2p83"]
-size = Vector2(18, 32)
+size = Vector2(32, 18)
 
 [node name="Phaser" type="Area2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 19
+collision_mask = 16
 script = ExtResource("1_4enjs")
 damage = 25
-speed = 1000
+life_span = 3
+speed = 1500
+cooldown = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -18,5 +22,4 @@ shape = SubResource("RectangleShape2D_e2p83")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1.5, 1.5, 1.5, 1)
-rotation = 4.71239
 texture = ExtResource("2_ykxrp")
