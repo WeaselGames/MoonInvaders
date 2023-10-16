@@ -23,6 +23,8 @@ func _on_player_ready(_player: Player) -> void:
 	enemy_spawn_timer = Timer.new()
 	enemy_spawn_timer.one_shot = false
 	enemy_spawn_timer.wait_time = 10
+	add_child(enemy_spawn_timer)
+	enemy_spawn_timer.start()
 	enemy_spawn_timer.timeout.connect(self._on_enemy_spawn_timer_timeout)
 	rng = RandomNumberGenerator.new()
 	check_spawns()
@@ -38,16 +40,19 @@ func _on_reset_game() -> void:
 	enemies.clear()
 	enemy_spawn_timer.queue_free()
 
+func _on_object_cleared(object: Node2D):
+	if object is Enemy:
+		enemies.erase(object)
+		already_spawned[object._home] = false
+
 func _ready() -> void:
 	EventBus.player_ready.connect(self._on_player_ready)
 	EventBus.world_ready.connect(self._on_world_ready)
 	EventBus.enemy_destroyed.connect(self._on_enemy_destroyed)
-
-func set_starting_position(enemy: Enemy, n: int, count: int) -> void:
-	enemy.position.y = player.position.y - 500
-	enemy.position.x = player.position.x + (get_viewport().size.x / count) * n
+	EventBus.object_cleared.connect(self._on_object_cleared)
 
 func check_spawns() -> void:
+	print("test")
 	var center = player.position
 
 	var x_from: int = floor(center.x - (enemy_spawn_radius/2.0))
@@ -59,7 +64,7 @@ func check_spawns() -> void:
 		while y_from < y_to:
 			rng.seed = GameState.game_seed + x_from ^ y_from
 			var spawn_location: Vector2 = Vector2(x_from, y_from)
-			if rng.randf_range(0, 1) <= 0.003 && !already_spawned.has(spawn_location):
+			if rng.randf_range(0, 1) <= 0.003 && !already_spawned.has(spawn_location) && already_spawned.get(spawn_location) == true:
 				var enemy = enemy_scene.instantiate()
 				enemies.append(enemy)
 				world.add_object(enemy)
@@ -69,3 +74,12 @@ func check_spawns() -> void:
 			y_from += 1
 		x_from += 1
 	
+	if enemies.size() < 2:
+		var enemy1 = enemy_scene.instantiate()
+		var enemy2 = enemy_scene.instantiate()
+		enemies.append(enemy1)
+		enemies.append(enemy2)
+		world.add_object(enemy1)
+		world.add_object(enemy2)
+		enemy1.position = Vector2(player.position.x + randi_range(-500, 500), player.position.y + randi_range(-500, 500))
+		enemy2.position = Vector2(player.position.x + randi_range(-500, 500), player.position.y + randi_range(-500, 500))

@@ -24,3 +24,4 @@ func _physics_process(_delta: float) -> void:
 		if child is Ship or child is Projectile or child is Item:
 			if abs(child.position.distance_to(_player.position)) > 2500:
 				child.queue_free()
+				EventBus.object_cleared.emit(child)

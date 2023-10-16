@@ -9,3 +9,4 @@ signal world_ready(world: World)
 signal player_ready(player: Player)
 
 signal enemy_destroyed(enemy: Enemy)
+signal object_cleared(object: Node2D)
