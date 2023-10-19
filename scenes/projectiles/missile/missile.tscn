@@ -17,6 +17,14 @@ size = Vector2(58.6667, 12)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydfmc"]
 animations = [{
 "frames": [{
+"duration": 0.5,
+"texture": ExtResource("4_afh6l")
+}],
+"loop": true,
+"name": &"cruise",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_586jc")
 }, {
@@ -65,9 +73,12 @@ collision_mask = 16
 script = ExtResource("1_ukt6e")
 animated_sprite = NodePath("AnimatedSprite")
 vision_cone = NodePath("VisionCone")
+yaw_acceleration = 8.0
+pitbull_max_angle_change = 45.0
 size = Vector2i(12, 60)
 life_span = 20
-speed = 1000
+acceleration = 1400
+max_speed = 1000
 projectile_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -76,15 +87,10 @@ shape = SubResource("RectangleShape2D_ir46m")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ydfmc")
-animation = &"startup"
-frame = 7
-frame_progress = 1.0
+animation = &"cruise"
 
 [node name="VisionCone" parent="." instance=ExtResource("10_o07cp")]
 position = Vector2(34.6667, 0)
-width = 300
-height = 400
+width = 800
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered" flags=18]
-[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]

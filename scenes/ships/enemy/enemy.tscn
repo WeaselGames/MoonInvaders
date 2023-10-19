@@ -48,4 +48,3 @@ hardpoint_type = 1
 
 [node name="VisionCone" parent="." instance=ExtResource("5_2e22m")]
 peripheral_radious = 250
-visulaize = true

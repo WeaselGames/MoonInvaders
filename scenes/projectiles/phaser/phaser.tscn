@@ -13,7 +13,8 @@ collision_mask = 16
 script = ExtResource("1_4enjs")
 damage = 25
 life_span = 3
-speed = 1500
+acceleration = 6000
+max_speed = 1500
 cooldown = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

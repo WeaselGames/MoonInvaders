@@ -22,7 +22,13 @@ func pickup_item(item: Item) -> void:
 				health = max_health
 				
 		item.ItemType.AMMO:
-			ammo.append(item.get_ammo())
+			var pickuped_ammo: Ammo = item.get_ammo()
+			for stored_ammo in ammo:
+				if stored_ammo.projectile_type == pickuped_ammo.projectile_type && stored_ammo.projectile_scene == pickuped_ammo.projectile_scene:
+					stored_ammo.projectile_count += pickuped_ammo.projectile_count
+					return
+					
+			ammo.append(pickuped_ammo)
 
 func ship_destroyed() -> void:
 	EventBus.game_over.emit()

@@ -11,8 +11,6 @@ func fire(ship: Ship) -> float:
 	if projectile.projectile_type != hardpoint_type:
 		return 0
 	
-	projectile.position = get_global_transform().origin
-	projectile.velocity = Vector2(projectile.speed, 0).rotated(ship.rotation) + ship.velocity
 	projectile.origin = ship
 	GameState.world.add_object(projectile)
 	return projectile.cooldown*0.01

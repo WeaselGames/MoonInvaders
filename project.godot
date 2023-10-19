@@ -22,6 +22,7 @@ UI="*res://src/ui.gd"
 EventBus="*res://src/event_bus.gd"
 GameState="*res://src/game_state.gd"
 EnemyManager="*res://src/enemy_manager.gd"
+Util="*res://src/util.gd"
 
 [display]
 

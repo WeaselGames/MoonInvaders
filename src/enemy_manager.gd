@@ -75,5 +75,3 @@ func check_spawns() -> void:
 			
 			y_from += 1
 		x_from += 1
-	
-	print("test: %d" % enemies.size())

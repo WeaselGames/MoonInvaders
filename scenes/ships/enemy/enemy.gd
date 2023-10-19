@@ -120,17 +120,17 @@ func update_input():
 					search_looking_around = false
 					
 		EnemyAIState.ATTACK_PLAYER:
-			var player_angle: float = get_player_angle()
+			var player_angle: float = position.angle_to_point(_player.position)
 			var player_distance: float = abs(position.distance_to(_player.position))
-			if player_distance > 100:
-				thrust_towards(player_angle, 0.5)
+			if player_distance > 250:
+				thrust_towards(player_angle, 1)
+			elif player_distance <= 150:
+				thrust_towards(_player.position.angle_to_point(position), 1)
+				
 			aim_at(player_angle)
 			if attack_cooldown_timer.time_left == 0 && abs(player_angle - rotation) < deg_to_rad(2):
 				fire()
 				attack_cooldown_timer.start(attack_cooldown)
-
-func get_player_angle() -> float:
-	return position.angle_to_point(_player.position)
 
 func thrust_towards(angle: float, by: float = 1) -> void:
 		var input_vector: Vector2 = Vector2(by, 0).rotated(angle - rotation)
@@ -139,16 +139,4 @@ func thrust_towards(angle: float, by: float = 1) -> void:
 func aim_at(angle: float) -> void:
 	var angle_diff: float = angle - rotation
 	if abs(angle_diff) > deg_to_rad(2):
-		yaw = find_fastest_yaw(angle_diff)
-
-func find_fastest_yaw(angle_diff: float) -> float:
-	if angle_diff > 0 && angle_diff < PI:
-		return 1
-	elif angle_diff > 0 && angle_diff > PI:
-		return -1
-	elif angle_diff < 0 && angle_diff > -PI:
-		return -1
-	elif angle_diff < 0 && angle_diff < -PI:
-		return 1
-	else:
-		return 0
+		yaw = Util.find_fastest_yaw(angle_diff)

@@ -13,9 +13,9 @@ extends CharacterBody2D
 @export var max_health: int = 100
 
 @export var max_speed: int = 400
-@export var friction: int = 10
-@export var acceleration: int = 15
-@export var yaw_acceleration: float = 1
+@export var friction: int = 300
+@export var acceleration: int = 500
+@export var yaw_acceleration: float = 7.0
 @export var yaw_max_speed: float = 4.0
 
 @export var weapon_hardpoints: Array[Node2D]
@@ -82,16 +82,16 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if yaw == 0:
-		rotation_velocity = move_toward(rotation_velocity, 0, friction)
+		rotation_velocity = move_toward(rotation_velocity, 0, friction * delta)
 	else:
-		rotation_velocity = move_toward(rotation_velocity, yaw * yaw_max_speed, yaw_acceleration)
+		rotation_velocity = move_toward(rotation_velocity, yaw * yaw_max_speed, yaw_acceleration * delta)
 	
 	rotation += rotation_velocity * delta
 	
 	if thrust == 0 and strafe == 0:
-		velocity = velocity.move_toward(Vector2(0, 0), friction) 
+		velocity = velocity.move_toward(Vector2(0, 0), friction * delta) 
 	else:
-		velocity = velocity.move_toward(Vector2(thrust * max_speed, strafe * max_speed).rotated(rotation), acceleration)
+		velocity = velocity.move_toward(Vector2(thrust * max_speed, strafe * max_speed).rotated(rotation), acceleration * delta)
 	
 	velocity = velocity.limit_length(max_speed)
 	
